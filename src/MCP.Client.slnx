@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="Azure.SpeechRecognition/Azure.SpeechRecognition.csproj" Id="cf7ac23e-b3c9-4ab1-ac69-edcaeac4068b" />
   <Project Path="MCP.Client/MCP.Client.csproj" Id="0a92f8a6-6777-48d7-90ef-84b5b164c539" />
 </Solution>
