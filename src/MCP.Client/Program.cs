@@ -30,13 +30,13 @@ if (string.IsNullOrWhiteSpace(speechKey))
 ISpeechRecognitionService speechRecognitionService = new AzureSpeechRecognitionService(
     speechKey, 
     speechRegion, 
-    language: "es-ES");
+    language: "es-AR");
 
 ISpeechSynthesisService speechSynthesisService = new AzureSpeechSynthesisService(
     speechKey, 
     speechRegion, 
-    language: "es-ES", 
-    voiceName: "es-ES-ElviraNeural");
+    language: "es-AR", 
+    voiceName: "es-AR-TomasNeural"); //es-AR-ElenaNeural //es-AR-TomasNeural
 
 IAIAgentService aiAgentService = new OpenAIAgentService(
     openAiKey, 
