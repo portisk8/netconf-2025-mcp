@@ -38,10 +38,30 @@ ISpeechSynthesisService speechSynthesisService = new AzureSpeechSynthesisService
     language: "es-AR", 
     voiceName: "es-AR-TomasNeural"); //es-AR-ElenaNeural //es-AR-TomasNeural
 
+// Obtener la ruta del proyecto del servidor MCP (opcional)
+// Si no se proporciona, el agente funcionará sin herramientas MCP
+string? mcpServerProjectPath = Environment.GetEnvironmentVariable("MCP_SERVER_PROJECT_PATH");
+if (string.IsNullOrWhiteSpace(mcpServerProjectPath))
+{
+    // Intentar usar la ruta relativa al proyecto MCP.Server.API
+    var currentDir = Directory.GetCurrentDirectory();
+    var serverProjectPath = Path.GetFullPath(Path.Combine(currentDir, "..", "..", "..", "..", "MCP.Server.API", "MCP.Server.API.csproj"));
+    if (File.Exists(serverProjectPath))
+    {
+        mcpServerProjectPath = serverProjectPath;
+        Console.WriteLine($"✅ Servidor MCP encontrado en: {mcpServerProjectPath}");
+    }
+    else
+    {
+        Console.WriteLine("⚠️ Advertencia: No se encontró el proyecto del servidor MCP. El agente funcionará sin herramientas MCP.");
+    }
+}
+
 IAIAgentService aiAgentService = new OpenAIAgentService(
     openAiKey, 
     model, 
-    instructions: "You are a helpful and friendly assistant. Respond in a conversational and natural way in Spanish.");
+    instructions: "You are a helpful and friendly assistant. Respond in a conversational and natural way in Spanish.",
+    mcpServerProjectPath: mcpServerProjectPath);
 
 // Crear servicio de aplicación
 IVoiceAssistantService voiceAssistant = new VoiceAssistantService(

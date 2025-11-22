@@ -1,0 +1,14 @@
+{
+  "servers": {
+    "MCP.Server.API": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "../MCP.Server.API/MCP.Server.API.csproj"
+      ]
+    }
+  }
+}
+
